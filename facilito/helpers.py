@@ -2,6 +2,8 @@
 Helpers
 """
 
+from .models.quality import Quality  # Importar desde el nuevo módulo quality
+
 import json
 import os
 import re

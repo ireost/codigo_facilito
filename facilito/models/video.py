@@ -2,6 +2,9 @@
 Video model
 """
 
+from .. import consts
+from .quality import Quality  # Importar desde el nuevo módulo quality
+
 from enum import Enum
 from typing import Optional
 
@@ -11,6 +14,8 @@ from pydantic import BaseModel
 from .. import consts, helpers
 from ..utils.logger import logger
 from .download import YoutubeDLLogger
+
+
 
 
 class MediaType(Enum):

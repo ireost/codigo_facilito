@@ -1,5 +1,4 @@
 import typer
-from facilito.models.video import Quality  # type: ignore
 from facilito.core import Client  # type: ignore
 from facilito.utils.logger import cli_logger  # type: ignore
 from facilito import helpers  # type: ignore
@@ -8,6 +7,7 @@ import json
 from rich import print as tprint
 from rich.console import Console
 from rich.table import Table
+from facilito.models.quality import Quality  # Importar desde el nuevo módulo quality
 
 app = typer.Typer()
 
@@ -42,7 +42,7 @@ def load_urls(file_path: str) -> list[str]:
 @app.command()
 def download(
     file_path: str = "urls.txt",
-    quality: Quality = Quality.BEST.value,
+    quality: str = Quality._720,  # Establecer 720p como calidad por defecto
     headless: bool = False,
 ):
     """Descarga videos y cursos completos con autenticación usando cookies."""
@@ -129,3 +129,7 @@ def download(
 
 if __name__ == "__main__":
     app()
+
+#Explicación
+""" Retrasos Aleatorios: Después de cada descarga, se agrega un retraso aleatorio entre 1 y 5 segundos para evitar que el servidor detecte un patrón de descargas rápidas.
+Rotación de User Agents: Antes de cada descarga, se selecciona un User Agent aleatorio de una lista predefinida para que las descargas parezcan provenir de diferentes clientes. """
