@@ -1,4 +1,5 @@
 import typer
+from facilito.models.quality import Quality  # Importar desde el nuevo módulo quality
 from facilito.core import Client  # type: ignore
 from facilito.utils.logger import cli_logger  # type: ignore
 from facilito import helpers  # type: ignore
@@ -7,7 +8,6 @@ import json
 from rich import print as tprint
 from rich.console import Console
 from rich.table import Table
-from facilito.models.quality import Quality  # Importar desde el nuevo módulo quality
 
 app = typer.Typer()
 
@@ -42,7 +42,7 @@ def load_urls(file_path: str) -> list[str]:
 @app.command()
 def download(
     file_path: str = "urls.txt",
-    quality: str = Quality._720,  # Establecer 720p como calidad por defecto
+    quality: Quality = Quality.BEST,
     headless: bool = False,
 ):
     """Descarga videos y cursos completos con autenticación usando cookies."""
@@ -60,7 +60,7 @@ def download(
             if helpers.is_video_url(url):
                 try:
                     video = client.video(url)
-                    video.download(quality=quality)
+                    video.download(quality=quality.value)
                     tprint(f"✓ Descargado: {video.title}")
                 except Exception as e:
                     tprint(f"✗ Error descargando {url}: {e}")
@@ -107,7 +107,7 @@ def download(
                                     # Ruta del directorio de descarga
                                     dir_path = f"{consts.DOWNLOADS_DIR}/{course_title}/{pfx_s:02d}. {section_title}"
                                     video.download(
-                                        quality=quality,
+                                        quality=quality.value,
                                         dir_path=dir_path,
                                         prefix_name=f"{pfx_v:02d}. ",
                                     )
