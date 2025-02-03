@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "codigo_facilito",
+			"path": "."
+		}
+	],
+	"settings": {
+		"[python]": {
+			"editor.codeActionsOnSave": {
+				"source.organizeImports": "explicit"
+			},
+			"editor.formatOnSave": true
+		},
+		"python.testing.pytestArgs": [
+			"test"
+		],
+		"python.testing.unittestEnabled": false,
+		"python.testing.pytestEnabled": true
+	}
+}
