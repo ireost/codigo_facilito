@@ -42,7 +42,7 @@ def load_urls(file_path: str) -> list[str]:
 @app.command()
 def download(
     file_path: str = "urls.txt",
-    quality: Quality = Quality.BEST,
+    quality: Quality = '720p',
     headless: bool = False,
 ):
     """Descarga videos y cursos completos con autenticación usando cookies."""
